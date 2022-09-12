@@ -1201,5 +1201,5 @@ welcome() #This will initialize everything
     # Place a limit on planet radii (it can not be bigger than the star's radius)
 	# Make possible to go back to past pages
 	# Make possible to the user to load an image for the objects
-	# Make a page with all the given properties of the objects and some derives (e.g. radius, mass, density, velocity... )
+	# Make a page with all the given properties of the objects and some derived (e.g. radius, mass, density, velocity... )
 	# Make the scale change as a function of a given planet's distance, so you can represent more distant planets
