@@ -1187,7 +1187,7 @@ def final_simulation_page(): #This is the final page, which hosts the simulation
 		screen.blit(name_text_star, (WIDTH/2 - name_text_star.get_width()//2, HEIGHT/2 - name_text_star.get_height()//2))
 
 		#These blit the scale and a note about scales:
-		scale_text = FONT_8.render(f"Scale: 1AU - {100/(scale_for_text/(250/AU))} pixels", 1, red)
+		scale_text = FONT_8.render(f"Scale: 1AU - {100*(scale_for_text/(250/AU))} pixels", 1, red)
 		screen.blit(scale_text, (100, 50))
 
 		scale_text2 = FONT_8.render("Objects are not drawn to any scale", 1, red)
