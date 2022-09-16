@@ -11,7 +11,7 @@
 #Note: "To blit" something means to draw it on the screen 
 
 #For this code to run, you need the following modules:
-        # pygame
+		# pygame
 		# pygame_gui
 		# math
 		# os
@@ -81,16 +81,16 @@ distance_of_p2 = 2
 distance_of_p3 = 3
 
 #Base values for orbital periods (derived from equations): 
-O_P_of_p1 = round(((2*3.14*distance_of_p1*AU*math.sqrt(distance_of_p1*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p1*MASS_OF_EARTH)))/31536000), 2)
-O_P_of_p2 = round(((2*3.14*distance_of_p2*AU*math.sqrt(distance_of_p2*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p2*MASS_OF_EARTH)))/31536000), 2)
-O_P_of_p3 = round(((2*3.14*distance_of_p3*AU*math.sqrt(distance_of_p3*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + + mass_of_p3*MASS_OF_EARTH)))/31536000), 2)
+O_P_of_p1 = round(math.sqrt(((distance_of_p1)**3)/(mass_of_star)),2) 
+O_P_of_p2 = round(math.sqrt(((distance_of_p2)**3)/(mass_of_star)),2)
+O_P_of_p3 = round(math.sqrt(((distance_of_p3)**3)/(mass_of_star)), 2)
 
 #These are images/figures for later use:        
 background = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'background.jpg')), (WIDTH, HEIGHT))
+	os.path.join('Assets', 'background.jpg')), (WIDTH, HEIGHT))
 
 star = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'Sol.png')), (150, 150))
+	os.path.join('Assets', 'Sol.png')), (150, 150))
 
 def welcome(): #This is our welcome page
 	#These are some variables for our event loop:
@@ -185,7 +185,7 @@ def star_design_screen(): #This is the page for designing the star
 	star_text4 = FONT_3.render("What is the radius of your star (in units of Radius of the Sun)?", 1, white)
 	message = FONT_1.render("(press enter to confirm or the check mark to type other value)", 1, white)
 	Star_design_rect = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'Star design.jpg')), (205, 205))
+	os.path.join('Assets', 'Star design.jpg')), (205, 205))
 
 	global base_values_text #This is global for later use
 	base_values_text = FONT_8.render("(The base values are written in the answer boxes, confirm your changes in case you have any!)", 1, red)
@@ -342,17 +342,16 @@ def planet1_design_page():
 	planet1_text3 = FONT_3.render("What is the mass of this planet (in units of Mass of the Earth)?", 1, white)
 	planet1_text4 = FONT_3.render("What is the radius of this planet (in units of Radius of the Earth)?", 1, white)
 	planet1_text5 = FONT_3.render("What is the distance from this planet to your star(in Astronomical Units)?", 1, white)
-	planet1_text6 = FONT_3.render("What is the orbital period of this planet? (in years)", 1, white)
 	message = FONT_1.render("(press enter to confirm or the check mark to type other value)", 1, white)
 	planet_design_rect = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'space design rectangle.jpg')), (120, 120))
+	os.path.join('Assets', 'space design rectangle.jpg')), (120, 120))
 
 	global blow_up_message1
 	blow_up_message1 = FONT_8.render("Blow up:", 1, red)
 
 	global planet1
 	planet1 = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'Planeta 1.png')), (80, 80))
+	os.path.join('Assets', 'Planeta 1.png')), (80, 80))
 
 	#These are all the buttons:
 	Continue_button = Button(Continue_button_image, 1200, 701, "Continue")
@@ -360,14 +359,12 @@ def planet1_design_page():
 	Button2 = Button(Yes_check_mark_image, 195, 285, "")
 	Button3 = Button(Yes_check_mark_image, 195, 410, "")
 	Button4 = Button(Yes_check_mark_image, 195, 535, "")
-	Button5 = Button(Yes_check_mark_image, 195, 660, "")
 
 	#These make our answer boxes global for later use:
 	global name_of_planet1_input
 	global mass_of_planet1_input
 	global radius_of_planet1_input
 	global distance_of_planet1_input
-	global orbital_period_of_planet1_input
 
 	#These are our answer boxes with the allowed characters and the base values written:
 	name_of_planet1_input = pygame_gui.elements.UITextEntryLine(relative_rect = pygame.Rect((80, 135),(100,50)), manager = MANAGER, 
@@ -389,10 +386,6 @@ def planet1_design_page():
 	distance_of_planet1_input.set_allowed_characters(["0","1","2","3","4","5","6","7","8","9","."])
 	distance_of_planet1_input.set_text("1")
 
-	orbital_period_of_planet1_input = pygame_gui.elements.UITextEntryLine(relative_rect = pygame.Rect((80, 635),(100,50)), manager = MANAGER, 
-	object_id = "#O_P_of_p1")
-	orbital_period_of_planet1_input.set_allowed_characters(["0","1","2","3","4","5","6","7","8","9","."])
-	orbital_period_of_planet1_input.set_text("1")
 
 	#These are all the thins blitted onto the screen:
 	screen.blit(background, (0,0))
@@ -401,12 +394,10 @@ def planet1_design_page():
 	screen.blit(planet1_text3, (80, 230))
 	screen.blit(planet1_text4, (80, 355))
 	screen.blit(planet1_text5, (80, 480))
-	screen.blit(planet1_text6, (80, 605))
 	screen.blit(message,(80, 122))
 	screen.blit(message,(80, 247))
 	screen.blit(message,(80, 372))
 	screen.blit(message,(80, 497))
-	screen.blit(message,(80, 622))
 	screen.blit(planet_design_rect, (1150, 240))
 	screen.blit(base_values_text,(55, 50 + planet1_text1.get_height()//2))
 	screen.blit(blow_up_message1, (1150, 240))
@@ -438,7 +429,8 @@ def planet1_design_page():
 				global mass_of_p1
 				mass_of_p1 = float(mass_of_planet1_input.get_text()) #This stores the user input in a variable
 				
-				mass_of_planet1_input.disable() #This disables the answer box so the user can not type in it anymore		 
+				mass_of_planet1_input.disable() #This disables the answer box so the user can not type in it anymore
+						 
 				
 			if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#radius_of_p1": #This checks if we pressed enter in this specific answer box
 				Button3.update() #Creates our check mark (which is a button in case we want to change the value passed)
@@ -464,17 +456,13 @@ def planet1_design_page():
 				global distance_of_p1
 				distance_of_p1 = float(distance_of_planet1_input.get_text()) #This stores the user input in a variable
 				
+				global O_P_of_p1
+				O_P_of_p1 = round(math.sqrt(((distance_of_p1)**3)/(mass_of_star)),2) #This calculates and stores the new orbital period
+				
 				distance_of_planet1_input.disable() #This disables the answer box so the user can not type in it anymore
 				
 				planets_design_control() #This call the planets_design_control() function to store the distance in the list of distances
-			
-			if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#O_P_of_p1": #This checks if we pressed enter in this specific answer box
-				Button5.update() #Creates our check mark (which is a button in case we want to change the value passed)
-
-				global O_P_of_p1
-				O_P_of_p1 = float(orbital_period_of_planet1_input.get_text()) #This stores the user input in a variable
-				
-				orbital_period_of_planet1_input.disable() #This disables the answer box so the user can not type in it anymore
+				 
 
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				#These will check which button was pressed and execute its functions:
@@ -482,7 +470,6 @@ def planet1_design_page():
 				Button2.checkForInput(pygame.mouse.get_pos())
 				Button3.checkForInput(pygame.mouse.get_pos())
 				Button4.checkForInput(pygame.mouse.get_pos())
-				Button5.checkForInput(pygame.mouse.get_pos())
 				Continue_button.checkForInput(pygame.mouse.get_pos())
 
 			Continue_button.update()
@@ -504,14 +491,14 @@ def planet2_design_page():
 	planet2_text3 = FONT_3.render("What is the mass of this planet (in units of Mass of the Earth)?", 1, white)
 	planet2_text4 = FONT_3.render("What is the radius of this planet (in units of Radius of the Earth)?", 1, white)
 	planet2_text5 = FONT_3.render("What is the distance from this planet to your star (in Astronomical Units)?", 1, white)
-	planet2_text6 = FONT_3.render("What is the orbital period of this planet? (in years)", 1, white)
 	message = FONT_1.render("(press enter to confirm or the check mark to type other value)", 1, white)
+	
 	planet_design_rect = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'space design rectangle.jpg')), (120, 120))
+	os.path.join('Assets', 'space design rectangle.jpg')), (120, 120))
 
 	global planet2
 	planet2 = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'Planet 2.png')), (80, 80))
+	os.path.join('Assets', 'Planet 2.png')), (80, 80))
 
 	#These are all the buttons:
 	Continue_button = Button(Continue_button_image, 1201, 701, "Continue")
@@ -519,14 +506,14 @@ def planet2_design_page():
 	Button2 = Button(Yes_check_mark_image, 196, 285, "")
 	Button3 = Button(Yes_check_mark_image, 196, 410, "")
 	Button4 = Button(Yes_check_mark_image, 196, 535, "")
-	Button5 = Button(Yes_check_mark_image, 196, 660, "")
+
 
 	#These make our answer boxes global for later use:
 	global name_of_planet2_input
 	global mass_of_planet2_input
 	global radius_of_planet2_input
 	global distance_of_planet2_input
-	global orbital_period_of_planet2_input
+
 
 	#These are our answer boxes with the allowed characters and the base values written:
 	name_of_planet2_input = pygame_gui.elements.UITextEntryLine(relative_rect = pygame.Rect((80, 135),(100,50)), manager = MANAGER, 
@@ -548,10 +535,7 @@ def planet2_design_page():
 	distance_of_planet2_input.set_allowed_characters(["0","1","2","3","4","5","6","7","8","9","."])
 	distance_of_planet2_input.set_text("2")
 
-	orbital_period_of_planet2_input = pygame_gui.elements.UITextEntryLine(relative_rect = pygame.Rect((80, 635),(100,50)), manager = MANAGER, 
-	object_id = "#O_P_of_p2")
-	orbital_period_of_planet2_input.set_allowed_characters(["0","1","2","3","4","5","6","7","8","9","."])
-	orbital_period_of_planet2_input.set_text("2.83")
+	
 
 	#These are all the thins blitted onto the screen:
 	screen.blit(background, (0,0))
@@ -560,12 +544,10 @@ def planet2_design_page():
 	screen.blit(planet2_text3, (80, 230))
 	screen.blit(planet2_text4, (80, 355))
 	screen.blit(planet2_text5, (80, 480))
-	screen.blit(planet2_text6, (80, 605))
 	screen.blit(message,(80, 122))
 	screen.blit(message,(80, 247))
 	screen.blit(message,(80, 372))
 	screen.blit(message,(80, 497))
-	screen.blit(message,(80, 622))
 	screen.blit(planet_design_rect, (1150, 240))
 	screen.blit(blow_up_message1, (1150, 240))
 	screen.blit(base_values_text,(55, 50 + planet2_text1.get_height()//2))
@@ -621,25 +603,19 @@ def planet2_design_page():
 				
 				global distance_of_p2
 				distance_of_p2 = float(distance_of_planet2_input.get_text())
+
+				global O_P_of_p2
+				O_P_of_p2 = round(math.sqrt(((distance_of_p2)**3)/(mass_of_star)),2)  #This calculates and stores the new orbital period
 				
 				distance_of_planet2_input.disable()
 				
 				planets_design_control() #This call the planets_design_control() function to store the distance in the list of distances
-			
-			if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#O_P_of_p2":
-				Button5.update()
-				
-				global O_P_of_p2
-				O_P_of_p2 = float(orbital_period_of_planet2_input.get_text())
-				
-				orbital_period_of_planet2_input.disable()
 
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				Button1.checkForInput(pygame.mouse.get_pos())
 				Button2.checkForInput(pygame.mouse.get_pos())
 				Button3.checkForInput(pygame.mouse.get_pos())
 				Button4.checkForInput(pygame.mouse.get_pos())
-				Button5.checkForInput(pygame.mouse.get_pos())
 				Continue_button.checkForInput(pygame.mouse.get_pos())
 
 			Continue_button.update()
@@ -661,14 +637,14 @@ def planet3_design_page():
 	planet3_text3 = FONT_3.render("What is the mass of this planet (in units of Mass of the Earth)?", 1, white)
 	planet3_text4 = FONT_3.render("What is the radius of this planet (in units of Radius of the Earth)?", 1, white)
 	planet3_text5 = FONT_3.render("What is the distance from this planet to your star(in Astronomical Units)?", 1, white)
-	planet3_text6 = FONT_3.render("What is the orbital period of this planet? (in years)", 1, white)
 	message = FONT_1.render("(press enter to confirm or the check mark to type other value)", 1, white)
+	
 	planet_design_rect = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'space design rectangle.jpg')), (120, 120))
+	os.path.join('Assets', 'space design rectangle.jpg')), (120, 120))
 	
 	global planet3
 	planet3 = pygame.transform.scale(pygame.image.load(
-    os.path.join('Assets', 'Planeta 3.png')), (80, 80))
+	os.path.join('Assets', 'Planeta 3.png')), (80, 80))
 	
 	#These are all the buttons:
 	Continue_button = Button(Continue_button_image, 1202, 700, "Continue")
@@ -676,14 +652,12 @@ def planet3_design_page():
 	Button2 = Button(Yes_check_mark_image, 196, 286, "")
 	Button3 = Button(Yes_check_mark_image, 196, 411, "")
 	Button4 = Button(Yes_check_mark_image, 196, 536, "")
-	Button5 = Button(Yes_check_mark_image, 196, 661, "")
 
 	#These make our answer boxes global for later use:
 	global name_of_planet3_input
 	global mass_of_planet3_input
 	global radius_of_planet3_input
 	global distance_of_planet3_input
-	global orbital_period_of_planet3_input
 
 	#These are our answer boxes with the allowed characters and the base values written:
 	name_of_planet3_input = pygame_gui.elements.UITextEntryLine(relative_rect = pygame.Rect((80, 135),(100,50)), manager = MANAGER, 
@@ -705,11 +679,6 @@ def planet3_design_page():
 	distance_of_planet3_input.set_allowed_characters(["0","1","2","3","4","5","6","7","8","9","."])
 	distance_of_planet3_input.set_text("3")
 
-	orbital_period_of_planet3_input = pygame_gui.elements.UITextEntryLine(relative_rect = pygame.Rect((80, 635),(100,50)), manager = MANAGER, 
-	object_id = "#O_P_of_p3")
-	orbital_period_of_planet3_input.set_allowed_characters(["0","1","2","3","4","5","6","7","8","9","."])
-	orbital_period_of_planet3_input.set_text("5.20")
-
 	#These are all the thins blitted onto the screen:
 	screen.blit(background, (0,0))
 	screen.blit(planet3_text1, (50, 35))
@@ -717,12 +686,10 @@ def planet3_design_page():
 	screen.blit(planet3_text3, (80, 230))
 	screen.blit(planet3_text4, (80, 355))
 	screen.blit(planet3_text5, (80, 480))
-	screen.blit(planet3_text6, (80, 605))
 	screen.blit(message,(80, 122))
 	screen.blit(message,(80, 247))
 	screen.blit(message,(80, 372))
 	screen.blit(message,(80, 497))
-	screen.blit(message,(80, 622))
 	screen.blit(planet_design_rect, (1150, 240))
 	screen.blit(blow_up_message1, (1150, 240))
 	screen.blit(base_values_text,(55, 50 + planet3_text1.get_height()//2))
@@ -778,25 +745,20 @@ def planet3_design_page():
 				
 				global distance_of_p3
 				distance_of_p3 = float(distance_of_planet3_input.get_text())
+
+				global O_P_of_p3
+				O_P_of_p3 = round(math.sqrt(((distance_of_p3)**3)/(mass_of_star)), 2)
 				
 				distance_of_planet3_input.disable()
 				
 				planets_design_control()
 			
-			if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#O_P_of_p3":
-				Button5.update()
-				
-				global O_P_of_p3
-				O_P_of_p3 = float(orbital_period_of_planet3_input.get_text())
-				
-				orbital_period_of_planet3_input.disable()
 
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				Button1.checkForInput(pygame.mouse.get_pos())
 				Button2.checkForInput(pygame.mouse.get_pos())
 				Button3.checkForInput(pygame.mouse.get_pos())
 				Button4.checkForInput(pygame.mouse.get_pos())
-				Button5.checkForInput(pygame.mouse.get_pos())
 				Continue_button.checkForInput(pygame.mouse.get_pos())
 
 			Continue_button.update()
@@ -886,29 +848,13 @@ class Button(): #This class creates our buttons and define the functions of each
 				
 				screen.blit(Not_check_mark_image, (self.x_pos - Not_check_mark_image.get_width()//2, self.y_pos - Not_check_mark_image.get_height()//2))
 			
-			if self.x_pos == 195 and self.y_pos == 660:
-				orbital_period_of_planet1_input.rebuild()
-				orbital_period_of_planet1_input.enable()
-				
-				screen.blit(Not_check_mark_image, (self.x_pos - Not_check_mark_image.get_width()//2, self.y_pos - Not_check_mark_image.get_height()//2))
 			
 			if self.x_pos == 1200 and self.y_pos == 701: #This is the continue button
-				#(2*3.14*distance_of_p1*AU*math.sqrt(distance_of_p1*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p1*MASS_OF_EARTH)))/31536000) is the minimum orbital period for a stable orbit
-				#The following if statement prints an error message if the minimum orbital period is not matched or surpassed
-				if O_P_of_p1 < round(((2*3.14*distance_of_p1*AU*math.sqrt(distance_of_p1*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p1*MASS_OF_EARTH)))/31536000), 2):
-					
-					error_message2 = FONT_9.render(f"NOT STABLE ORBIT - MIN = {round(((2*3.14*distance_of_p1*AU*math.sqrt(distance_of_p1*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p1*MASS_OF_EARTH)))/31536000), 2)} yrs", 1 , red)
-					
-					screen.blit(error_message2, (225, 660 - error_message2.get_height()//2))
-					screen.blit(Not_check_mark_image, (195 - Not_check_mark_image.get_width()//2, 660 - Not_check_mark_image.get_height()//2))
-				
-				#If you match or surpass the minimum orbital period for a stable orbit, the following if statement is executed:
-				elif O_P_of_p1 >= round(((2*3.14*distance_of_p1*AU*math.sqrt(distance_of_p1*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p1*MASS_OF_EARTH)))/31536000), 2):
-					planets_design_control() #This calls the planets_design_control() function to see if the user wants more than one planet
-					if "planet2" in list_of_planets: #If planet2 is in the list, then the user wants at least to planets and moves to the next design page
-						planet2_design_page()
-					else: #If planet2 is not in the list, the user only wants 1 planet and can move directly to the final page
-						final_simulation_page()
+				planets_design_control() #This calls the planets_design_control() function to see if the user wants more than one planet
+				if "planet2" in list_of_planets: #If planet2 is in the list, then the user wants at least to planets and moves to the next design page
+					planet2_design_page()
+				else: #If planet2 is not in the list, the user only wants 1 planet and can move directly to the final page
+					final_simulation_page()
 			
 			if self.x_pos == 196 and self.y_pos == 160:
 				name_of_planet2_input.rebuild()
@@ -938,31 +884,19 @@ class Button(): #This class creates our buttons and define the functions of each
 				
 				screen.blit(Not_check_mark_image, (self.x_pos - Not_check_mark_image.get_width()//2, self.y_pos - Not_check_mark_image.get_height()//2))
 			
-			if self.x_pos == 196 and self.y_pos == 660:
-				orbital_period_of_planet2_input.rebuild()
-				orbital_period_of_planet2_input.enable()
-				
-				screen.blit(Not_check_mark_image, (self.x_pos - Not_check_mark_image.get_width()//2, self.y_pos - Not_check_mark_image.get_height()//2))
 			
 			if self.x_pos == 1201 and self.y_pos == 701:
 
 				if distance_of_p2 in list_of_distances: #This will see if the user wants to have a second planet, if he wants, distance_of_p2 will be on the list
 					if list_of_distances[0] == list_of_distances[1]: #This checks if the distances of planet 1 and 2 are equal
 						#If they are, the following will print an error message and the user will not move on:
-						error_message5 = FONT_9.render("2 PLANETS CAN NOT HAVE THE SAME DISTANCE", 1 , red)
+						error_message5 = FONT_9.render("2 PLANETS CAN NOT HAVE THE SAME DISTANCE (code problem)", 1 , red)
 						
 						screen.blit(error_message5, (226, 535 - error_message5.get_height()//2))
 						screen.blit(Not_check_mark_image, (196 - Not_check_mark_image.get_width()//2, 535 - Not_check_mark_image.get_height()//2))
-
-				if O_P_of_p2 < round(((2*3.14*distance_of_p2*AU*math.sqrt(distance_of_p2*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p2*MASS_OF_EARTH)))/31536000), 2):
-					error_message3 = FONT_9.render(f"NOT STABLE ORBIT - MIN = {round(((2*3.14*distance_of_p2*AU*math.sqrt(distance_of_p2*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p2*MASS_OF_EARTH)))/31536000), 2)} yrs", 1 , red)
-					
-					screen.blit(error_message3, (225, 660 - error_message3.get_height()//2))
-					screen.blit(Not_check_mark_image, (196 - Not_check_mark_image.get_width()//2, 660 - Not_check_mark_image.get_height()//2))
 				
 				if distance_of_p2 in list_of_distances:
-					#The following if statement will allow you to move on only if the minimum orbital period for stable orbit and distances conditions are met
-					if O_P_of_p2 >= round(((2*3.14*distance_of_p2*AU*math.sqrt(distance_of_p2*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p2*MASS_OF_EARTH)))/31536000), 2) and list_of_distances[0] != list_of_distances[1]:
+					if  list_of_distances[0] != list_of_distances[1]:
 						planets_design_control()
 						if "planet3" in list_of_planets:
 							planet3_design_page()
@@ -997,11 +931,6 @@ class Button(): #This class creates our buttons and define the functions of each
 				
 				screen.blit(Not_check_mark_image, (self.x_pos - Not_check_mark_image.get_width()//2, self.y_pos - Not_check_mark_image.get_height()//2))
 			
-			if self.x_pos == 196 and self.y_pos == 661:
-				orbital_period_of_planet3_input.rebuild()
-				orbital_period_of_planet3_input.enable()
-				
-				screen.blit(Not_check_mark_image, (self.x_pos - Not_check_mark_image.get_width()//2, self.y_pos - Not_check_mark_image.get_height()//2))
 			
 			if self.x_pos == 1202 and self.y_pos == 700:
 
@@ -1011,15 +940,10 @@ class Button(): #This class creates our buttons and define the functions of each
 						
 						screen.blit(error_message6, (226, 536 - error_message6.get_height()//2))
 						screen.blit(Not_check_mark_image, (196 - Not_check_mark_image.get_width()//2, 536 - Not_check_mark_image.get_height()//2))
-
-				if O_P_of_p3 < round(((2*3.14*distance_of_p3*AU*math.sqrt(distance_of_p3*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + + mass_of_p3*MASS_OF_EARTH)))/31536000), 2):
-					error_message4 = FONT_9.render(f"NOT STABLE ORBIT - MIN = {round(((2*3.14*distance_of_p3*AU*math.sqrt(distance_of_p3*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + mass_of_p3*MASS_OF_EARTH)))/31536000), 2)} yrs", 1 , red)
-					screen.blit(error_message4, (225, 660 - error_message4.get_height()//2))
-					screen.blit(Not_check_mark_image, (196 - Not_check_mark_image.get_width()//2, 661 - Not_check_mark_image.get_height()//2))
 					
 				if distance_of_p3 in list_of_distances:
 					#The following if statement will allow you to move on only if the minimum orbital period for stable orbit and distances conditions are met
-					if O_P_of_p3 >= round(((2*3.14*distance_of_p3*AU*math.sqrt(distance_of_p3*AU)/math.sqrt(G*(mass_of_star*MASS_OF_SUN + + mass_of_p3*MASS_OF_EARTH)))/31536000), 2) and list_of_distances[2] != list_of_distances[1] and list_of_distances[2] != list_of_distances[0]:
+					if list_of_distances[2] != list_of_distances[1] and list_of_distances[2] != list_of_distances[0]:
 						final_simulation_page()
 				
 	def changeColor(self, position): #This makes the text in the button change color when the mouse pass over it. 
@@ -1198,7 +1122,7 @@ def final_simulation_page(): #This is the final page, which hosts the simulation
 welcome() #This will initialize everything
 
 #Suggestions for code improvement:
-    # Place a limit on planet radii (it can not be bigger than the star's radius)
+	# Place a limit on planet radii (it can not be bigger than the star's radius)
 	# Make possible to go back to past pages
 	# Make possible to the user to load an image for the objects
 	# Make a page with all the given properties of the objects and some derived (e.g. radius, mass, density, velocity... )
