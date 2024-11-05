@@ -8,7 +8,7 @@ If you are a student, this project can help you:
 - How to handle user input and preview errors in pygame; and
 - Physics and physics simulations with pygame. 
 
-If you are a techer: 
+If you are a teacher: 
 - This project requires very basic python skills for you to run it on your computer; and 
 - You can design your own solar system for your class easily.
        
